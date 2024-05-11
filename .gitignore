@@ -38,3 +38,6 @@
 # Build directories
 cmake-build-debug
 cmake-build-release
+
+# Logfiles directory
+logs

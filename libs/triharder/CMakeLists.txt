@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.28)
 project(TriHarderLIB VERSION 1.0 DESCRIPTION "SDL2 OpenGL Library" LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED  ON)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # -----------------------------------------------------------------------------
 # Dependencies
@@ -17,7 +17,13 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(sdl2)
 
 # spdlog
-
+include(FetchContent)
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG v1.14.1
+)
+FetchContent_MakeAvailable(spdlog)
 
 # -----------------------------------------------------------------------------
 # Project build
@@ -28,8 +34,12 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../../external/glad ${CMAKE_CURRENT_BINARY_DIR}/glad)
 
 add_library(${PROJECT_NAME} STATIC
-        src/application.cpp
+        src/core/application.cpp
+        src/core/window.cpp
+        src/core/logging.cpp
+        src/core/sdl_context.h
+        src/core/sdl_context.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/external/glad/include)
-target_link_libraries(${PROJECT_NAME} PUBLIC SDL2 glad)
+target_link_libraries(${PROJECT_NAME} PUBLIC SDL2 glad spdlog)
