@@ -1,6 +1,7 @@
 #include "window.h"
 #include "logging.h"
 #include "sdl_context.h"
+#include <glad/glad.h>
 
 namespace TriHarder {
     UniquePtr<Window> Window::create(const WindowDescriptor &descriptor) {
@@ -15,6 +16,10 @@ namespace TriHarder {
         m_height = descriptor.Height;
 
         SdlContext::getInstance().initialize();
+
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
         auto logger = LogManager::getInstance().getLogger();
         logger->info(std::format("Creating window with title: {}, width: {}, height: {}",
@@ -33,10 +38,20 @@ namespace TriHarder {
             logger->error(std::format("Failed to create OpenGL context: {}", SDL_GetError()));
             throw std::runtime_error("Failed to create OpenGL context");
         }
+
+        // Initialize GLAD
+        if (!gladLoadGLLoader(GLADloadproc(SDL_GL_GetProcAddress))) {
+            logger->error("Failed to initialize GLAD");
+            throw std::runtime_error("Failed to initialize GLAD");
+        }
     }
 
     Window::~Window() {
         SDL_GL_DeleteContext(m_glContext);
         SDL_DestroyWindow(m_window);
+    }
+
+    void Window::SwapBuffers() const {
+        SDL_GL_SwapWindow(m_window);
     }
 }

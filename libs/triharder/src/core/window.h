@@ -44,6 +44,8 @@ namespace TriHarder {
         static UniquePtr<Window> create(const WindowDescriptor &descriptor = WindowDescriptor());
         ~Window();
 
+        void SwapBuffers() const;
+
     private:
         String m_title;
         uint32_t m_width = 0;

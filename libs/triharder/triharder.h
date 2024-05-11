@@ -2,9 +2,6 @@
 
 #include <memory>
 #include <iostream>
-#include <sstream>
-#include <vector>
-#include <string>
 
 namespace TriHarder {
 
@@ -87,11 +84,4 @@ namespace TriHarder {
     //! preferred.
     typedef std::string String;
 
-    template<typename... Args>
-    String format_string(const char* format, Args... args) {
-        size_t size = snprintf(nullptr, 0, format, args...) + 1;
-        std::vector<char> buf(size);
-        snprintf(buf.data(), size, format, args...);
-        return String(buf.data(), buf.size() - 1);
-    }
 }
