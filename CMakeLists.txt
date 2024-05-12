@@ -11,6 +11,7 @@ include_directories(${PROJECT_SOURCE_DIR}/libs/triharder/src)
 
 add_subdirectory(libs/triharder)
 add_subdirectory(research/spdlog)
+add_subdirectory(research/triharder_lib_exp)
 add_subdirectory(tests/triharder)
 
 # ------------------------------------------------------------------------------
