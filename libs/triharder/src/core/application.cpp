@@ -1,6 +1,5 @@
 #include <glad/glad.h>
 #include <SDL_events.h>
-#include <chrono>
 #include <thread>
 #include "application.h"
 #include "window.h"
@@ -14,7 +13,7 @@ namespace TriHarder {
 
     void Application::run() {
         window_ = Window::create();
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.1f, 0.1f, 0.25f, 1.0f);
 
         auto logger = LogManager::getInstance().getLogger();
         while (true){
