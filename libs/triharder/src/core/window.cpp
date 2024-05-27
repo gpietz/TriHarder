@@ -11,9 +11,9 @@ namespace TriHarder {
     }
 
     void Window::initialize(const TriHarder::WindowDescriptor &descriptor) {
-        m_title = descriptor.Title;
-        m_width = descriptor.Width;
-        m_height = descriptor.Height;
+        title_ = descriptor.Title;
+        width_ = descriptor.Width;
+        height_ = descriptor.Height;
 
         SdlContext::getInstance().initialize();
 
@@ -23,18 +23,18 @@ namespace TriHarder {
 
         auto logger = LogManager::getInstance().getLogger();
         logger->info(std::format("Creating window with title: {}, width: {}, height: {}",
-                                 m_title, m_width, m_height));
+                                 title_, width_, height_));
 
-        m_window = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                    (int)m_width, (int)m_height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-        if (!m_window) {
+        window_ = SDL_CreateWindow(title_.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                                    (int)width_, (int)height_, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+        if (!window_) {
             logger->error(std::format("Failed to create window: {}", SDL_GetError()));
             throw std::runtime_error("Failed to create window");
         }
 
         // Create OpenGL context
-        m_glContext = SDL_GL_CreateContext(m_window);
-        if (!m_glContext) {
+        gl_context_ = SDL_GL_CreateContext(window_);
+        if (!gl_context_) {
             logger->error(std::format("Failed to create OpenGL context: {}", SDL_GetError()));
             throw std::runtime_error("Failed to create OpenGL context");
         }
@@ -47,11 +47,11 @@ namespace TriHarder {
     }
 
     Window::~Window() {
-        SDL_GL_DeleteContext(m_glContext);
-        SDL_DestroyWindow(m_window);
+        SDL_GL_DeleteContext(gl_context_);
+        SDL_DestroyWindow(window_);
     }
 
     void Window::SwapBuffers() const {
-        SDL_GL_SwapWindow(m_window);
+        SDL_GL_SwapWindow(window_);
     }
 }

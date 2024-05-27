@@ -39,6 +39,7 @@ add_library(${PROJECT_NAME} STATIC
         src/core/logging.cpp
         src/core/sdl_context.h
         src/core/sdl_context.cpp
+        src/core/color.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/external/glad/include)

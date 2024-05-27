@@ -33,6 +33,15 @@ void resultExperiments() {
     std::cout << "R4 unwrap_or = " << r4.unwrap_or(1255) << "\n";
     std::cout << "R4 unwrap_or_default = " << r4.unwrap_or_default() << "\n";
     std::cout << "R4 unwrap_or_else = " << r4.unwrap_or_else([]() { return 1236; }) << "\n";
+
+    std::cout << "\n";
+
+    auto r5 = r4;
+    std::cout << "R5 is_ok = " << r4.is_ok() << "\n";
+    std::cout << "R5 is_error = " << r4.is_error() << "\n";
+    std::cout << "R5 unwrap_or = " << r4.unwrap_or(1255) << "\n";
+    std::cout << "R5 unwrap_or_default = " << r4.unwrap_or_default() << "\n";
+    std::cout << "R5 unwrap_or_else = " << r4.unwrap_or_else([]() { return 1236; }) << "\n";
 }
 
 int main(int argc, char* argv[]) {

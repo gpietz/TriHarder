@@ -44,7 +44,7 @@ namespace TriHarder {
     class InvalidStateTransition : public SceneError {
     public:
         //! @brief Constructs an InvalidStateTransition object without any error message.
-        InvalidStateTransition() :SceneError("Invalid state transition") {}
+        InvalidStateTransition() : SceneError("Invalid state transition") {}
 
         //! @brief Constructs an InvalidStateTransition object with the specified error message.
         InvalidStateTransition(const std::string &msg) : SceneError(msg) {}

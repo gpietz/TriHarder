@@ -84,4 +84,5 @@ namespace TriHarder {
     //! preferred.
     typedef std::string String;
 
+    typedef unsigned char uchar_t;
 }

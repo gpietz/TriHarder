@@ -47,11 +47,11 @@ namespace TriHarder {
         void SwapBuffers() const;
 
     private:
-        String m_title;
-        uint32_t m_width = 0;
-        uint32_t m_height = 0;
-        SDL_Window *m_window = nullptr;
-        SDL_GLContext m_glContext = nullptr;
+        String title_;
+        uint32_t width_ = 0;
+        uint32_t height_ = 0;
+        SDL_Window *window_ = nullptr;
+        SDL_GLContext gl_context_ = nullptr;
 
         void initialize(const WindowDescriptor &descriptor);
     };
